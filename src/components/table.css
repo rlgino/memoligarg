@@ -1,0 +1,44 @@
+.grid {
+    margin: 3em;
+    display: grid;
+    width: 50%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 2em;
+}
+
+.coveredCard {
+    background-image: url("afa/afa.jpg");
+}
+
+.boca {
+    background-image: url("afa/boca.svg");
+}
+.river {
+    background-image: url("afa/river.png");
+}
+.sanlorenzo {
+    background-image: url("afa/sanlorenzo.png");
+}
+.velez {
+    background-image: url("afa/velez.png");
+}
+.independiente {
+    background-image: url("afa/independiente.png");
+}
+.racing {
+    background-image: url("afa/racing.png");
+}
+.huracan {
+    background-image: url("afa/huracan.png");
+}
+.estudiantes {
+    background-image: url("afa/estudiantes.png");
+}
+
+.box {
+    width: 9.6em;
+    height: 11.5em;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
