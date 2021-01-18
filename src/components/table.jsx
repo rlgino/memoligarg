@@ -6,7 +6,8 @@ function Table() {
   const [actualUser, setActualUser] = useState("Gino");
   const [points, setPoints] = useState(new Map());
   const [teamsSorted, setTeamsSorted] = useState([]);
-  const [uncoveredCards, setUncoveredCards] = useState([])
+  const [uncoveredCards, setUncoveredCards] = useState([]);
+  const [msg, setMsg] = useState(null)
 
   const users = ["Gino", "Roberto"];
   const TEAMS = [
@@ -46,33 +47,43 @@ function Table() {
   }, []);
 
   const uncoverCard = (id) => {
+    if (msg !== null)
+      return
+    console.log(`Show card ${id}`);
+    uncoveredCards.push(id)
+    setUncoveredCards(uncoveredCards)
     if (selected === null) {
       setSelected(id);
       return;
     }
 
     if (teamsSorted[id] === teamsSorted[selected]) {
+      setMsg("Coincidencia! Punto para " + actualUser)
       points.set(actualUser, points.get(actualUser) + 1);
-      uncoveredCards.push(selected);
-      uncoveredCards.push(id);
-      setUncoveredCards(uncoveredCards)
+      setSelected(null);
     } else {
-      setActualUser("Gino" === actualUser ? "Roberto" : "Gino");
+      setMsg("No coincide")
+      setTimeout(()=> {
+        const id1 = uncoveredCards.pop()
+        const id2 = uncoveredCards.pop()
+        console.log(`Hide cards ${id1} ${id2}`);
+        setUncoveredCards(uncoveredCards);
+        setActualUser("Gino" === actualUser ? "Roberto" : "Gino");
+        setSelected(null);
+        setMsg(null)
+      }, 3000)
     }
-
-    setSelected(null);
   };
 
   return (
     <div>
+      <div>{ msg !== null ? `Error msg: ${msg}` : <></>}</div>
       <div className="grid">
         {teamsSorted.map((team, i) => {
           const showCard = uncoveredCards.indexOf(i) > -1 || i === selected;
           return (
-            <div
-              className={`box ${
-                showCard ? team : "coveredCard"
-              }`}
+            <div key={i}
+              className={`box ${showCard ? team : "coveredCard"}`}
               onClick={() => {
                 uncoverCard(i);
               }}
