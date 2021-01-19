@@ -47,9 +47,8 @@ function Table() {
   }, []);
 
   const uncoverCard = (id) => {
-    if (msg !== null)
-      return
-    console.log(`Show card ${id}`);
+    if (msg !== null) return
+
     uncoveredCards.push(id)
     setUncoveredCards(uncoveredCards)
     if (selected === null) {
@@ -58,15 +57,13 @@ function Table() {
     }
 
     if (teamsSorted[id] === teamsSorted[selected]) {
-      setMsg("Coincidencia! Punto para " + actualUser)
       points.set(actualUser, points.get(actualUser) + 1);
       setSelected(null);
     } else {
       setMsg("No coincide")
       setTimeout(()=> {
-        const id1 = uncoveredCards.pop()
-        const id2 = uncoveredCards.pop()
-        console.log(`Hide cards ${id1} ${id2}`);
+        uncoveredCards.pop()
+        uncoveredCards.pop()
         setUncoveredCards(uncoveredCards);
         setActualUser("Gino" === actualUser ? "Roberto" : "Gino");
         setSelected(null);

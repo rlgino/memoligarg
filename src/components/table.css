@@ -4,7 +4,7 @@
     width: 50%;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-gap: 2em;
+    grid-gap: .5em;
 }
 
 .coveredCard {
@@ -37,8 +37,8 @@
 }
 
 .box {
-    width: 9.6em;
-    height: 11.5em;
+    width: 5em;
+    height: 7em;
     background-size: contain;
     background-repeat: no-repeat;
 }
