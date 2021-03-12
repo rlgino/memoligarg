@@ -4,12 +4,15 @@ import "./table.css";
 function Table() {
   const [selected, setSelected] = useState(null);
   const [actualUser, setActualUser] = useState("Gino");
-  const [points, setPoints] = useState(new Map());
   const [teamsSorted, setTeamsSorted] = useState([]);
   const [uncoveredCards, setUncoveredCards] = useState([]);
   const [msg, setMsg] = useState(null)
 
-  const users = ["Gino", "Roberto"];
+  const user1 = "Gino"
+  const [punt1, setPunt1] = useState(0)
+  const user2 = "Rocio"
+  const [punt2, setPunt2] = useState(0)
+
   const TEAMS = [
     "boca",
     "river",
@@ -36,13 +39,7 @@ function Table() {
     }
     setTeamsSorted(localTeams);
 
-    const localPoints = new Map();
-    users.forEach((user) => {
-      localPoints.set(user, 0);
-    });
-    setPoints(localPoints);
-
-    setActualUser("Gino");
+    setActualUser(actualUser === user1 ? user2 : user1);
     return () => {};
   }, []);
 
@@ -57,15 +54,21 @@ function Table() {
     }
 
     if (teamsSorted[id] === teamsSorted[selected]) {
-      points.set(actualUser, points.get(actualUser) + 1);
       setSelected(null);
+      if (actualUser === user1) {
+        const res = punt1 + 1
+        setPunt1(res)
+      } else {
+        const res = punt2 + 1
+        setPunt2(res)
+      }
     } else {
       setMsg("No coincide")
       setTimeout(()=> {
         uncoveredCards.pop()
         uncoveredCards.pop()
         setUncoveredCards(uncoveredCards);
-        setActualUser("Gino" === actualUser ? "Roberto" : "Gino");
+        setActualUser(user1 === actualUser ? user2 : user1);
         setSelected(null);
         setMsg(null)
       }, 3000)
@@ -73,8 +76,9 @@ function Table() {
   };
 
   return (
-    <div>
-      <div>{ msg !== null ? `Error msg: ${msg}` : <></>}</div>
+    <div className="main">
+      <div className="turn">{ `Turno de: ${actualUser}` }</div>
+      <div className="empty" />
       <div className="grid">
         {teamsSorted.map((team, i) => {
           const showCard = uncoveredCards.indexOf(i) > -1 || i === selected;
@@ -89,9 +93,18 @@ function Table() {
         })}
       </div>
       <div className="points">
-        {Object.entries(points).map((key, v) => {
-          return <div>{v[0]}</div>;
-        })}
+        <div className="user">
+          {user1}
+          <div className="user-points">
+            {punt1}
+          </div>
+        </div>
+        <div className="user">
+          {user2}
+          <div className="user-points">
+            {punt2}
+          </div>
+        </div>
       </div>
     </div>
   );
