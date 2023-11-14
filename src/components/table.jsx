@@ -8,7 +8,7 @@ function Table() {
   const [uncoveredCards, setUncoveredCards] = useState([]);
   const [msg, setMsg] = useState(null)
 
-  const user1 = "Gino"
+  const user1 = "Jugador 1"
   const [punt1, setPunt1] = useState(0)
   const user2 = "Jugador 2"
   const [punt2, setPunt2] = useState(0)
