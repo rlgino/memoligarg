@@ -10,7 +10,7 @@ function Table() {
 
   const user1 = "Gino"
   const [punt1, setPunt1] = useState(0)
-  const user2 = "Rocio"
+  const user2 = "Jugador 2"
   const [punt2, setPunt2] = useState(0)
 
   const TEAMS = [
